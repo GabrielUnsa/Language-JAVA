@@ -1,8 +1,8 @@
-package filosofosTanenbaum;
+package TanenbaumSolution;
 
 import java.util.concurrent.Semaphore;
 
-//Solucion Propuesta por A. Tanenbaum en su libro Sistemas Operativos: Diseño e Implementaciones 7th. Edicion.
+//Solucion Propuesta por A. Tanenbaum en su libro Sistemas Operativos Modernos 3ra Edicion - Editorial Pearson
 public class Tanenbaum implements Runnable{
 
 	private Thread Thread; //Hilo principal donde se ejecutara la aplicacion
@@ -42,7 +42,6 @@ public class Tanenbaum implements Runnable{
 	
 	//Muestra el nro del hilo (filosofo) que esta por pensar y duerme el hilo x cantidad de seg (rand)
 	public void Think() {
-		System.out.println("I am thinking: "+id);
 		try {
 			Thread.sleep((int) (Math.random() * 10000));
 		} catch(Exception e) {
@@ -52,7 +51,6 @@ public class Tanenbaum implements Runnable{
 	
 	//Muestra el nro del hilo (filosofo) que esta por comer y duerme el hilo x cantidad de seg (rand)
 	public void Eat() {
-		System.out.println("I am eating: "+id);
 		try {
 			Thread.sleep((int) (Math.random() * 10000));
 		} catch(Exception e) {
@@ -99,7 +97,6 @@ public class Tanenbaum implements Runnable{
 			Think();
 			ThinkingTime = (System.currentTimeMillis() - StartTime) / 1000;
 			text = "I thought: \t\t\t" + ThinkingTime + " \t\t\tsecond " + "->" + " I am\t\t\t " + id;
-			System.out.println(text);
 			try {
 				mutex2.acquire();
 				list.addNode(text);
@@ -110,7 +107,6 @@ public class Tanenbaum implements Runnable{
 			PutForks();
 			EatTime = ((System.currentTimeMillis() - StartTime) / 1000) - ThinkingTime;
 			text = "I ate:     \t\t\t" + EatTime + " \t\t\tsecond " + "->" + " I am\t\t\t " + id;
-			System.out.println(text);
 			try {
 				mutex2.acquire();
 				list.addNode(text);

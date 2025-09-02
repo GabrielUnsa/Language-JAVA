@@ -1,4 +1,10 @@
-package filosofosTanenbaum;
+package TanenbaumSolution;
+
+/*
+ * Clase Lista: Lista enlazada 
+ * @clsNode: start - Inicio de la lista (nodo inicial)
+ * @clsNode: end - Fin de la lista (nodo final)
+ */
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,6 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class clsList {
+	
 	protected clsNode start;
 	private clsNode end;
 	
@@ -26,25 +33,25 @@ public class clsList {
 		return start;
 	}
 	
-	public String getDataEnd() {
-		return this.end.getDataNode();
+	public String getEndInfo() {
+		return this.end.getNodeInfo();
 	}
 	
 	public void addNode(String data) {
 		if( isClear() ) {
 			this.start=this.end=new clsNode(data);
 		} else {
-			this.end.setNextNode(new clsNode (data));
+			this.end.setNextNode(new clsNode(data));
 			this.end = end.getNextNode();
 		}
 	}
 	
 	public int getValue(String valueString) {
-		if(valueString.indexOf(" ")==-1) return Integer.valueOf(valueString.substring(0,2));
+		if( valueString.indexOf(" ") == -1 ) return Integer.valueOf(valueString.substring(0,2));
 		else return Integer.valueOf(valueString.substring(0,1));
 	}
 	
-	public void saveExecutionData( int quantityPhilosophers) {
+	public void saveExecutionData( int quantityPhilosophers ) {
 		try {
 			JFileChooser auxLog = new JFileChooser();
 			int index = 0;
@@ -65,7 +72,7 @@ public class clsList {
 					bufferFile.write("*******Philosopher: " + index + "*********" );
 					bufferFile.newLine();
 					for(clsNode tmp=this.start; tmp != null; tmp=tmp.getNextNode()) {
-						values = tmp.getDataNode();
+						values = tmp.getNodeInfo();
 						valuesLen = values.length();
 						if( values.substring(valuesLen-1 , valuesLen).compareTo(String.valueOf(index)) == 0 ) {
 							bufferFile.write(values.replace("\t","").substring(0, 13));
